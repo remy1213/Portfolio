@@ -113,8 +113,13 @@ export function HeroSection() {
   }, []);
 
   useEffect(() => {
+    console.log("[v0] words array:", words, "length:", words.length);
     const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % words.length);
+      setWordIndex((prev) => {
+        const next = (prev + 1) % words.length;
+        console.log("[v0] wordIndex changed to:", next, "word:", words[next]);
+        return next;
+      });
     }, 2500);
     return () => clearInterval(interval);
   }, []);
