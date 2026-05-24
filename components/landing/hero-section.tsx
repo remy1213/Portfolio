@@ -107,22 +107,20 @@ function BlurWord({ word, trigger }: { word: string; trigger: number }) {
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    console.log("[v0] words array:", words, "length:", words.length);
+    if (!isMounted) return;
     const interval = setInterval(() => {
-      setWordIndex((prev) => {
-        const next = (prev + 1) % words.length;
-        console.log("[v0] wordIndex changed to:", next, "word:", words[next]);
-        return next;
-      });
+      setWordIndex((prev) => (prev + 1) % words.length);
     }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [isMounted]);
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden bg-black">
