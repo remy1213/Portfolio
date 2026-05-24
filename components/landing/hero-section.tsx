@@ -187,7 +187,7 @@ export function HeroSection() {
           >
             <span className="block whitespace-nowrap">Distributed compute,</span>
             <span className="block whitespace-nowrap">
-              agents that{" "}
+              to life through{" "}
               <span className="relative inline-block">
                 <BlurWord word={words[wordIndex]} trigger={wordIndex} />
               </span>
