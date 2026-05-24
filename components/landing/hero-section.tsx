@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-const words = ["Videography", "Content Creation", "Editing", "Content Strategy", "Graphic Design", "Website Building"];
+const words = ["Videography", "Editing", "Strategy", "Design", "Websites"];
 
 function BlurWord({ word, trigger }: { word: string; trigger: number }) {
   const letters = word.split("");
@@ -187,7 +187,7 @@ export function HeroSection() {
           >
             <span className="block whitespace-nowrap">Distributed compute,</span>
             <span className="block whitespace-nowrap">
-              to life through{" "}
+              to life with{" "}
               <span className="relative inline-block">
                 <BlurWord word={words[wordIndex]} trigger={wordIndex} />
               </span>
