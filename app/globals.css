@@ -91,6 +91,37 @@
   html {
     scroll-behavior: smooth;
   }
+  @media (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+    video,
+    video::-webkit-media-controls,
+    video::-webkit-media-controls-panel,
+    video::-webkit-media-controls-panel-container,
+    video::-webkit-media-controls-start-playback-button,
+    video::-webkit-media-controls-play-button,
+    video::-webkit-media-controls-timeline,
+    video::-webkit-media-controls-current-time-display,
+    video::-webkit-media-controls-time-remaining-display,
+    video::-webkit-media-controls-mute-button,
+    video::-webkit-media-controls-volume-slider,
+    video::-webkit-media-controls-volume-slider-container,
+    video::-webkit-media-controls-fullscreen-button,
+    video::-webkit-media-controls-seek-back-button,
+    video::-webkit-media-controls-seek-forward-button,
+    video::-webkit-media-controls-toggle-closed-captions-button {
+      cursor: none !important;
+    }
+
+    /* Restore native cursor in fullscreen mode so the browser can manage its visibility/fade natively */
+    :fullscreen,
+    :fullscreen *,
+    :-webkit-full-screen,
+    :-webkit-full-screen * {
+      cursor: auto !important;
+    }
+  }
 }
 
 @layer utilities {

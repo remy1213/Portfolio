@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { CustomCursor } from "@/components/ui/custom-cursor"
 import './globals.css'
 
 const instrumentSans = Instrument_Sans({ 
@@ -21,8 +22,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'COMPUTE - AI Agents for Distributed Computing',
-  description: 'Deploy autonomous AI agents on distributed infrastructure. Offload complex tasks to intelligent workers that run 24/7.',
+  title: 'Remy Wilkins Portfolio',
+  description: 'Filmed by Remy Wilkins, a Vancouver Island based creator.',
   generator: 'v0.app',
 }
 
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <CustomCursor />
         {children}
         <Analytics />
       </body>
