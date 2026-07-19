@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CustomCursor } from "@/components/ui/custom-cursor"
+import { profile } from "@/lib/content"
 import './globals.css'
 
 const instrumentSans = Instrument_Sans({ 
@@ -21,10 +22,24 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains'
 });
 
+// Tab title and description are editable in the admin (Site Text tab).
+const siteTitle = profile.siteTitle || `${profile.name} — Videographer & Editor`
+const siteDescription =
+  profile.siteDescription ||
+  'Cinematic videography, editing, and motion-rich websites by Remy Wilkins, a Vancouver Island based creator.'
+
 export const metadata: Metadata = {
-  title: 'Remy Wilkins Portfolio',
-  description: 'Filmed by Remy Wilkins, a Vancouver Island based creator.',
-  generator: 'v0.app',
+  title: {
+    default: siteTitle,
+    template: `%s — ${profile.name}`,
+  },
+  description: siteDescription,
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    type: 'website',
+    locale: 'en_CA',
+  },
 }
 
 export default function RootLayout({

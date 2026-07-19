@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
+import { profile, sectionText } from "@/lib/content";
+import { gsap } from "@/components/gsap/animate";
 
-const words = ["Videography", "Editing", "Strategy", "Design", "Websites"];
+const words = profile.heroWords;
 const heroVideos = [
   "/videos/hero.mp4",
 ];
@@ -115,7 +117,30 @@ export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isSingleVideo = heroVideos.length === 1;
+
+  // Scroll-out effect: headline drifts up and fades while the video
+  // slowly zooms as the hero leaves the viewport.
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const content = contentRef.current;
+    const wrap = wrapRef.current;
+    if (!section || !content || !wrap) return;
+
+    const ctx = gsap.context(() => {
+      const st = {
+        trigger: section,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      };
+      gsap.to(content, { yPercent: -30, autoAlpha: 0, ease: "none", scrollTrigger: st });
+      gsap.to(wrap, { scale: 1.12, ease: "none", scrollTrigger: st });
+    });
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     setIsVisible(true);
@@ -347,7 +372,7 @@ export function HeroSection() {
 
         const totalOpacity = baseOpacity + glowOpacity;
 
-        if (totalOpacity > 0.005) {
+        if (totalOpacity > 0.005 && ctx) {
           ctx.strokeStyle = `rgba(255, 255, 255, ${totalOpacity})`;
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
@@ -374,7 +399,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden bg-black">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden bg-black">
       {/* Background video with Warp Canvas restricted to its bounds */}
       <div id="hero-video-wrap" ref={wrapRef} className="absolute inset-0 z-0 overflow-hidden pointer-events-auto">
         <video
@@ -423,7 +448,7 @@ export function HeroSection() {
       </div>
       
       {/* Hero content container with z-20 to sit on top of warp canvas and remain fully interactive */}
-      <div className="relative z-20 w-full max-w-[1400px] mx-auto px-6 lg:px-12 py-32 lg:py-40">
+      <div ref={contentRef} className="relative z-20 w-full max-w-[1400px] mx-auto px-6 lg:px-12 py-32 lg:py-40">
         <div className="lg:max-w-[55%]">
         {/* Eyebrow */}
         <div 
@@ -433,7 +458,7 @@ export function HeroSection() {
         >
           <span className="inline-flex items-center gap-3 text-sm font-mono text-white/60">
             <span className="w-8 h-px bg-white/30" />
-            Filmed by Remy Wilkins, a Vancouver Island based creator.
+            {profile.heroEyebrow}
           </span>
         </div>
         
@@ -444,14 +469,25 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <span className="block whitespace-nowrap">Bringing ideas to</span>
+            <span className="block whitespace-nowrap">{sectionText.heroTitleLine1}</span>
             <span className="block whitespace-nowrap">
-              life with{" "}
+              {sectionText.heroTitleLine2}{" "}
               <span className="relative inline-block">
-                <BlurWord word={words[wordIndex]} trigger={wordIndex} />
+                <BlurWord key={wordIndex} word={words[wordIndex]} trigger={wordIndex} />
               </span>
             </span>
           </h1>
+        </div>
+
+        {/* Scroll cue under the headline */}
+        <div
+          className={`mt-10 inline-flex items-center gap-3 text-[10px] font-mono text-white/40 uppercase tracking-[0.35em] transition-all duration-700 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+          }`}
+        >
+          <span className="w-10 h-px bg-white/30" />
+          Scroll to explore
+          <span className="inline-block animate-bounce text-white/50">↓</span>
         </div>
         </div>
       </div>
@@ -463,11 +499,7 @@ export function HeroSection() {
         }`}
       >
         <div className="max-w-[1400px] mx-auto flex items-start gap-10 lg:gap-20">
-          {[
-            { value: "50+", label: "videos delivered" },
-            { value: "500+", label: "hours of experience" },
-            { value: "10+", label: "websites built" },
-          ].map((stat) => (
+          {profile.heroStats.map((stat) => (
             <div key={stat.label} className="flex flex-col gap-2">
               <span className="text-3xl lg:text-4xl font-display text-white">{stat.value}</span>
               <span className="text-xs text-white/50 leading-tight">
@@ -479,7 +511,16 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-
+      <div
+        className={`absolute bottom-12 right-6 lg:right-12 z-20 hidden md:flex flex-col items-center gap-3 transition-opacity duration-1000 delay-700 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <span className="text-[10px] font-mono text-white/40 uppercase tracking-[0.3em] [writing-mode:vertical-rl]">
+          Scroll to explore
+        </span>
+        <span className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent" />
+      </div>
     </section>
   );
 }

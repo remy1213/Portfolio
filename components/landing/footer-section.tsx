@@ -1,132 +1,114 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { profile } from "@/lib/content";
+import { FitText } from "@/components/ui/fit-text";
 
 const footerLinks = [
-  { name: "Featured Work", href: "/#featured" },
-  { name: "About Me", href: "/#about" },
-  { name: "Contact", href: "/#contact" },
+  { name: "Work", href: "/#work" },
+  { name: "Gallery", href: "/gallery" },
+  { name: "Reviews", href: "/reviews" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
-function AnimatedWaveCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationId: number;
-    let time = 0;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const animate = () => {
-      const width = canvas.offsetWidth;
-      const height = canvas.offsetHeight;
-      ctx.clearRect(0, 0, width, height);
-
-      ctx.strokeStyle = "rgba(100, 200, 150, 0.3)";
-      ctx.lineWidth = 1;
-
-      for (let wave = 0; wave < 3; wave++) {
-        ctx.beginPath();
-        for (let x = 0; x <= width; x += 5) {
-          const y =
-            height * 0.5 +
-            Math.sin(x * 0.01 + time + wave * 0.5) * 30 +
-            Math.sin(x * 0.02 + time * 1.5 + wave) * 20;
-          if (x === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-
-      time += 0.02;
-      animationId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="w-full h-full" />;
-}
-
 export function FooterSection() {
+  const year = new Date().getFullYear();
+  const socials = profile.socials.filter((s) => s.url);
+
   return (
     <footer className="relative bg-black">
-      {/* Panoramic banner image */}
-      <div className="relative w-full h-[340px] md:h-[420px] overflow-hidden">
-        <img
-          src="/images/footer.png"
-          alt="Footer banner"
-          className="w-full h-full object-cover object-center"
-        />
-        {/* Gradient fade to black at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
-        {/* Subtle dark vignette on sides */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
-      </div>
+      {/* Panoramic banner image — editable in admin, hidden when empty */}
+      {profile.footerBanner && (
+        <div className="relative w-full h-[340px] md:h-[420px] overflow-hidden">
+          <img
+            src={profile.footerBanner}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+        </div>
+      )}
 
-      {/* Footer content — black background, white text */}
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        {/* Main Footer */}
+      <div className="relative z-10 max-w-[1500px] mx-auto px-6 lg:px-12">
         <div className="py-16 lg:py-20">
           <div className="grid grid-cols-1 md:grid-cols-6 gap-12 lg:gap-8">
-            {/* Brand Column */}
-            <div className="col-span-1 md:col-span-4">
-              <a href="#" className="inline-flex items-center gap-2 mb-6">
-                <span className="text-2xl font-display text-white">Remy Wilkins Portfolio</span>
-              </a>
-
+            {/* Brand */}
+            <div className="col-span-1 md:col-span-3">
+              <Link href="/" className="inline-flex items-center gap-2 mb-6">
+                <span className="text-2xl font-display text-white">{profile.name}</span>
+              </Link>
               <p className="text-white/50 leading-relaxed max-w-xs text-sm">
-                Filmed by Remy Wilkins, a Vancouver Island based creator.
+                {profile.heroEyebrow}
               </p>
             </div>
 
-            {/* Link Column */}
+            {/* Navigation */}
             <div className="col-span-1 md:col-span-2">
               <h3 className="text-sm font-medium text-white mb-6">Navigation</h3>
               <ul className="space-y-4">
                 {footerLinks.map((link) => (
                   <li key={link.name}>
-                    <a
+                    <Link
                       href={link.href}
                       className="text-sm text-white/40 hover:text-white transition-colors inline-flex items-center gap-1 group"
                     >
                       {link.name}
                       <ArrowUpRight className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 transition-opacity" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Socials / Email */}
+            <div className="col-span-1 md:col-span-1">
+              <h3 className="text-sm font-medium text-white mb-6">Elsewhere</h3>
+              <ul className="space-y-4">
+                {socials.map((social) => (
+                  <li key={social.name}>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-white/40 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                    >
+                      {social.name}
+                      <ArrowUpRight className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 transition-opacity" />
                     </a>
                   </li>
                 ))}
+                <li>
+                  <a
+                    href={`mailto:${profile.contactEmail}`}
+                    className="text-sm text-white/40 hover:text-white transition-colors"
+                  >
+                    Email
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Giant wordmark */}
+        <div className="overflow-hidden pb-6 select-none" aria-hidden="true">
+          <FitText text={profile.name} className="font-display text-white/[0.06]" />
+        </div>
+
+        {/* Bottom bar */}
         <div className="py-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/30">
-            &copy; 2025 Remy Wilkins. All rights reserved.
+            &copy; {year} {profile.name}. All rights reserved.
           </p>
-
           <div className="flex items-center gap-4 text-sm text-white/30">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#52e2a0]" />
-              Available for work
+              <span className="w-2 h-2 rounded-full bg-[#52e2a0] animate-pulse" />
+              {profile.availability}
             </span>
           </div>
         </div>

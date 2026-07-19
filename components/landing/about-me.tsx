@@ -1,102 +1,75 @@
 "use client";
-import { profileData } from "@/data/profile";
-import BadgeCard, { BadgeData } from "@/components/ui/badge-card";
 
-const badgeData: BadgeData = {
-  name: "Remy Wilkins",
-  role: "Filmmaker",
-  roleType: "Videographer",
-  eventCode: "RW",
-  date: "2025",
-  location: "Vancouver Island, BC",
-  venue: "Vancouver Island",
-  address: "British Columbia, Canada",
-  website: "remywilkins.work",
-  email: "remyw554@gmail.com",
-  phone: "",
-  company: "Remy Wilkins",
-  tagline: "Bringing ideas to life through film",
-  colors: {
-    cardBg: "#0a0a0a",
-    accentColor: "#cab645",
-    nameColor: "#ffffff",
-    roleColor: "#cab645",
-    metaColor: "#6b7280",
-    footerBg: "#111111",
-    footerText: "#9ca3af",
-    ringColor: "#cab645",
-  },
-};
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { profile, sectionText } from "@/lib/content";
+import { Reveal, SplitReveal, Parallax } from "@/components/gsap/animate";
 
 export function AboutMe() {
   return (
-    <section id="about" className="relative py-24 bg-black text-white overflow-visible border-t border-white/5">
-      {/* Background ambient glow */}
+    <section id="about" className="relative py-16 lg:py-40 bg-black text-white border-t border-white/5 overflow-hidden">
+      {/* Ambient glow */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] rounded-full bg-violet-500/5 blur-[120px] pointer-events-none" />
 
-      {/* Badge — lives outside the grid, floats over everything */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2"
-        style={{ top: 0, width: 400, height: 820, zIndex: 9999 }}
-      >
-        <BadgeCard data={badgeData} />
-      </div>
-
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center">
-
-          {/* Left text */}
-          <div className="space-y-8 lg:text-right">
-            <div>
-              <h2 className="text-4xl lg:text-6xl font-display leading-[0.95] tracking-tight mb-6">
-                {profileData.aboutHeadline}
-              </h2>
-              <p className="text-white/60 leading-relaxed">
-                {profileData.aboutSubheading}
+      <div className="max-w-[1500px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Text */}
+          <div className="lg:col-span-7">
+            <Reveal>
+              <span className="inline-flex items-center gap-3 text-xs font-mono text-white/40 uppercase tracking-[0.25em] mb-6">
+                <span className="w-8 h-px bg-white/30" />
+                06 — {sectionText.aboutLabel}
+              </span>
+            </Reveal>
+            <SplitReveal
+              text={profile.aboutHeadline}
+              className="text-[clamp(2.2rem,5.5vw,5rem)] font-display leading-[0.95] tracking-tight mb-8"
+            />
+            <Reveal delay={0.15}>
+              <p className="text-lg lg:text-xl text-white/60 leading-relaxed max-w-2xl mb-6">
+                {profile.aboutSubheading}
               </p>
-            </div>
-            <div className="space-y-6 pt-6 border-t border-white/10">
-              <div>
-                <h3 className="text-sm font-medium text-white mb-1">Videography & Editing</h3>
-                <p className="text-xs text-white/40 leading-relaxed">
-                  Cinematic storytelling from concept to final cut.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-white mb-1">Brand Strategy</h3>
-                <p className="text-xs text-white/40 leading-relaxed">
-                  Connecting your story with the right audience.
-                </p>
-              </div>
-            </div>
+              <p className="text-sm text-white/40 leading-relaxed max-w-xl mb-10">
+                {profile.aboutBio1}
+              </p>
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-3 text-sm font-mono uppercase tracking-widest text-white/70 hover:text-white transition-colors"
+              >
+                <span className="relative">
+                  More about me
+                  <span className="absolute -bottom-1 left-0 w-full h-px bg-white/30 group-hover:bg-white transition-colors" />
+                </span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
+            </Reveal>
           </div>
 
-          {/* Center: empty spacer so grid maintains 3 cols */}
-          <div className="w-full h-[820px]" />
-
-          {/* Right text */}
-          <div className="space-y-8">
-            <div className="prose prose-invert max-w-none text-white/60 space-y-4 text-sm leading-relaxed">
-              <p>{profileData.aboutBio1}</p>
-              <p>{profileData.aboutBio2}</p>
-            </div>
-            <div className="space-y-6 pt-6 border-t border-white/10">
-              <div>
-                <h3 className="text-sm font-medium text-white mb-1">Design & Websites</h3>
-                <p className="text-xs text-white/40 leading-relaxed">
-                  Next.js, React, and motion-rich interfaces.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-white mb-1">Creative Direction</h3>
-                <p className="text-xs text-white/40 leading-relaxed">
-                  Visual consistency from concept to execution.
-                </p>
-              </div>
-            </div>
+          {/* Portrait (optional, editable in admin) — fades and eases in on scroll */}
+          <div className="lg:col-span-5">
+            {profile.aboutPortrait ? (
+              <Reveal delay={0.15} y={64}>
+                <Parallax speed={0.08}>
+                  <div className="relative aspect-[4/5] overflow-hidden bg-white/5">
+                    <img
+                      src={profile.aboutPortrait}
+                      alt={profile.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </Parallax>
+              </Reveal>
+            ) : (
+              <Reveal delay={0.2}>
+                <div className="border-l border-white/15 pl-8 py-4">
+                  <p className="text-2xl lg:text-3xl font-display text-white/50 leading-snug italic">
+                    “Digital experiences should feel as alive and intentional as a well-composed frame.”
+                  </p>
+                </div>
+              </Reveal>
+            )}
           </div>
-
         </div>
       </div>
     </section>

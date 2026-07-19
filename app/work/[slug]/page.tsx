@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { featuredItems } from "@/data/featured-work";
+import { featuredWork, videoEmbedUrl, isVerticalVideoUrl } from "@/lib/content";
 import { Navigation } from "@/components/landing/navigation";
 import { FooterSection } from "@/components/landing/footer-section";
 import { ArrowLeft, Camera, Film, Calendar, User, X } from "lucide-react";
@@ -9,11 +9,12 @@ import React, { useState } from "react";
 
 export default function WorkDetailPage() {
   const params = useParams();
-  const slug = params?.slug as string;
+  // Decode so slugs with special characters (encoded as %26 etc.) still match.
+  const slug = decodeURIComponent((params?.slug as string) ?? "");
   const [activePhoto, setActivePhoto] = useState<string | null>(null);
 
   // Find the matching work item
-  const item = featuredItems.find((it) => it.slug === slug);
+  const item = featuredWork.find((it) => it.slug === slug);
   const isVideo = (url: string) => /\.(mp4|webm|ogg|mov)$/i.test(url);
 
   if (!item) {
@@ -45,19 +46,35 @@ export default function WorkDetailPage() {
           </a>
         </div>
 
-        {/* Full Quality Video Container */}
-        {item.videoFull && (
+        {/* Full Quality Video — YouTube/Vimeo embed takes priority over a local file */}
+        {videoEmbedUrl(item.videoUrl) ? (
+          <div
+            className={`rounded-2xl overflow-hidden bg-black/40 border-2 border-white/10 shadow-2xl mb-16 ${
+              isVerticalVideoUrl(item.videoUrl)
+                ? "aspect-[9/16] h-[80vh] mx-auto"
+                : "aspect-video w-full"
+            }`}
+          >
+            <iframe
+              src={videoEmbedUrl(item.videoUrl)!}
+              title={item.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="w-full h-full"
+            />
+          </div>
+        ) : item.videoFull ? (
           <div className="w-full rounded-2xl overflow-hidden bg-white/5 border-2 border-white/10 shadow-2xl mb-16 relative flex items-center justify-center bg-black/40 max-h-[85vh]">
             <video
               src={item.videoFull}
               controls
-              autoPlay
               playsInline
-              preload="auto"
+              preload="metadata"
               className="w-full max-h-[85vh] object-contain rounded-2xl"
             />
           </div>
-        )}
+        ) : null}
 
         {/* Two-Column Grid: Info & Stills */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
