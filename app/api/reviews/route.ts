@@ -1,40 +1,20 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
 import crypto from 'crypto';
-
-// NOTE: reviews are stored in data/reviews.json on the server's disk.
-// This works when the site runs on a real server (or locally). On
-// serverless hosts like Vercel the filesystem is read-only per request,
-// so submissions there need a database/KV store instead.
-
-const reviewsPath = () => path.join(process.cwd(), 'data', 'reviews.json');
-
-export type Review = {
-  id: string;
-  name: string;
-  stars: number;
-  text: string;
-  date: string;
-  status: 'pending' | 'approved';
-};
-
-async function readReviews(): Promise<Review[]> {
-  try {
-    return JSON.parse(await fs.readFile(reviewsPath(), 'utf8'));
-  } catch {
-    return [];
-  }
-}
+import { readReviews, writeReviews } from '@/lib/reviews-store';
 
 /** Public: the approved reviews, newest first. */
 export async function GET() {
-  const reviews = await readReviews();
-  const approved = reviews
-    .filter((r) => r.status === 'approved')
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .map(({ id, name, stars, text, date }) => ({ id, name, stars, text, date }));
-  return NextResponse.json({ ok: true, reviews: approved });
+  try {
+    const reviews = await readReviews();
+    const approved = reviews
+      .filter((r) => r.status === 'approved')
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .map(({ id, name, stars, text, date }) => ({ id, name, stars, text, date }));
+    return NextResponse.json({ ok: true, reviews: approved });
+  } catch (err) {
+    console.error('[API Reviews Read Error]:', err);
+    return NextResponse.json({ ok: true, reviews: [] });
+  }
 }
 
 /** Public: submit a review — it waits as "pending" until approved in the admin. */
@@ -62,7 +42,7 @@ export async function POST(req: Request) {
       date: new Date().toISOString(),
       status: 'pending',
     });
-    await fs.writeFile(reviewsPath(), JSON.stringify(reviews, null, 2) + '\n', 'utf8');
+    await writeReviews(reviews);
 
     return NextResponse.json({ ok: true });
   } catch (err: any) {

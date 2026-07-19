@@ -338,6 +338,7 @@ export default function AdminPage() {
   /* ----- review moderation ----- */
   const [reviewsList, setReviewsList] = useState<AdminReview[] | null>(null);
   const [reviewBusy, setReviewBusy] = useState<string | null>(null);
+  const [reviewsBackend, setReviewsBackend] = useState<"redis" | "file" | null>(null);
 
   const moderateReview = async (action: "list" | "approve" | "decline" | "delete", id?: string) => {
     if (id) setReviewBusy(id);
@@ -348,8 +349,10 @@ export default function AdminPage() {
         body: JSON.stringify({ password, action, id }),
       });
       const data = await res.json();
-      if (data.ok) setReviewsList(data.reviews);
-      else setStatusMsg({ type: "error", text: data.error || "Review action failed." });
+      if (data.ok) {
+        setReviewsList(data.reviews);
+        if (data.backend) setReviewsBackend(data.backend);
+      } else setStatusMsg({ type: "error", text: data.error || "Review action failed." });
     } catch {
       setStatusMsg({ type: "error", text: "Review action failed." });
     }
@@ -1260,6 +1263,13 @@ export default function AdminPage() {
                   <p className="text-sm text-white/40 mt-1">
                     Submissions from the Reviews page wait here — nothing shows on the site until you approve it.
                   </p>
+                  {reviewsBackend && (
+                    <p className={`text-xs mt-2 font-mono ${reviewsBackend === "redis" ? "text-emerald-400" : "text-amber-300"}`}>
+                      {reviewsBackend === "redis"
+                        ? "● Connected to the cloud database — you're moderating the live site's reviews."
+                        : "● Using the local file — fine for now, but the live site needs the database connected (see .env.example)."}
+                    </p>
+                  )}
                 </div>
                 <button
                   type="button"

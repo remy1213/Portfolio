@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { readReviews, writeReviews, reviewsBackend } from '@/lib/reviews-store';
 
 const ADMIN_PASSWORD = "remy";
-const reviewsPath = () => path.join(process.cwd(), 'data', 'reviews.json');
 
 /** Admin-only (localhost): list all reviews, approve, decline, or delete. */
 export async function POST(req: Request) {
@@ -18,12 +16,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: 'Invalid password' }, { status: 401 });
     }
 
-    let reviews: any[] = [];
-    try {
-      reviews = JSON.parse(await fs.readFile(reviewsPath(), 'utf8'));
-    } catch {
-      reviews = [];
-    }
+    let reviews = await readReviews();
 
     if (action === 'approve') {
       const review = reviews.find((r) => r.id === id);
@@ -35,11 +28,11 @@ export async function POST(req: Request) {
     }
 
     if (action !== 'list') {
-      await fs.writeFile(reviewsPath(), JSON.stringify(reviews, null, 2) + '\n', 'utf8');
+      await writeReviews(reviews);
     }
 
     reviews.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-    return NextResponse.json({ ok: true, reviews });
+    return NextResponse.json({ ok: true, reviews, backend: reviewsBackend() });
   } catch (err: any) {
     console.error('[API Reviews Moderate Error]:', err);
     return NextResponse.json({ ok: false, error: err.message || 'Moderation failed' }, { status: 500 });
