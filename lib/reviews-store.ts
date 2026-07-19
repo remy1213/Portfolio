@@ -25,8 +25,16 @@ export type Review = {
 const REDIS_KEY = 'portfolio:reviews';
 
 function redisConfig() {
-  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+  // Vercel prefixes the injected vars with the name you chose when
+  // connecting the database ("remy"), so check that spelling too.
+  const url =
+    process.env.UPSTASH_REDIS_REST_URL ||
+    process.env.KV_REST_API_URL ||
+    process.env.remy_KV_REST_API_URL;
+  const token =
+    process.env.UPSTASH_REDIS_REST_TOKEN ||
+    process.env.KV_REST_API_TOKEN ||
+    process.env.remy_KV_REST_API_TOKEN;
   return url && token ? { url: url.replace(/\/$/, ''), token } : null;
 }
 

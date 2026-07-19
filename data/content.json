@@ -19,9 +19,9 @@
       }
     ],
     "aboutHeadline": "Who am I behind the camera?",
-    "aboutSubheading": "Based on Vancouver Island, I bridge the gap between cinematic storytelling and digital engineering.",
-    "aboutBio1": "My creative journey started with a camera—capturing the raw, untamed landscapes and matching that energy in the edit suite. Over the years, that passion for creating high-impact visuals naturally evolved into building the digital environments where they live.",
-    "aboutBio2": "Today, I collaborate with brands, creators, and companies to tell their stories through cinematic video production, brand strategy, and high-fidelity web development. I believe that digital experiences should feel as alive and intentional as a well-composed frame.",
+    "aboutSubheading": "Hello my name is Remy I'm 18 years old as of 26/07/19. I'm based on Vancouver Island. I started editing videos when I was around 10 years old then I got into cameras and filming in late 2024.",
+    "aboutBio1": "Today, I collaborate with brands, creators, and companies to tell their stories or make them engaging content through video production, brand strategy, and web development (on the side). ",
+    "aboutBio2": "",
     "aboutPortrait": "/images/uploads/dawdawd40653409.jpg",
     "contactHeadline": "Want to work together?",
     "contactSubheading": "Have an upcoming video project, design campaign, or website build? Drop a message and let's discuss how to bring it to life.",
@@ -44,7 +44,8 @@
     ],
     "footerBanner": "/images/footer.png",
     "siteTitle": "Remy Wilkins — Videographer & Editor",
-    "bookingUrl": "https://calendly.com/remyw554/30min"
+    "bookingUrl": "https://calendly.com/remyw554/30min",
+    "siteDescription": "Maker and thinker. Filming and editing."
   },
   "featuredWork": [
     {
@@ -171,7 +172,7 @@
       "videoPreviewStart": 1,
       "videoPreviewEnd": 7,
       "videoFull": "",
-      "description": "An artistic visual poem exploring athletic drive, isolation, and competitive willpower. Shot with organic moody natural lighting, this short piece matches rhythmic, deliberate editing cuts with raw audio design to pull the viewer into the athlete's singular state of focus.",
+      "description": "An artistic visual poem exploring athletic drive, isolation, and competitive willpower. Shot with organic moody natural lighting, this short piece matches rhythmic, deliberate editing cuts with raw audio design to pull the viewer into the athlete's singular state of focus.\n\nThis poem was made for Vancouver Island Visual Poetry contest, me and my friend who made this were finalists in this competition with 9000 dollars worth of rewards.\n\nRecorded early 2025 on a canon T3i which is a very old camera designed for photos. This is only on my portfolio for the diversity. 26/07/19",
       "client": "Personal Creative Project",
       "role": "Director, DP & Editor",
       "date": "Winter 2025",
@@ -198,7 +199,7 @@
       "videoPreviewStart": 0,
       "videoPreviewEnd": 6,
       "videoFull": "",
-      "description": "A cinematic high-pace editing showcase featuring the Porsche 718 Spyder cruising along coastal roads. The project focuses on high-speed dynamic tracking, seamless sound design sync, and automotive color grading. Designed to capture the aggressive performance and raw emotion of open-top motoring.",
+      "description": "A cinematic high-pace editing showcase featuring the Porsche 718 Spyder cruising along coastal roads. The project focuses on high-speed dynamic tracking, seamless sound design sync, and automotive color grading. Designed to capture the aggressive performance and raw emotion of open-top motoring. \n\nRecorded early 2025 on a canon T3i which is a very old camera designed for photos. This is only on my portfolio for the diversity so hopefully this will be replaced soon. 26/07/19",
       "client": "Automotive Showcase",
       "role": "Editor & Colorist",
       "date": "2025",
@@ -438,22 +439,25 @@
       {
         "name": "Videography & Editing",
         "desc": "Cinematic storytelling from concept to final cut.",
-        "details": "awdawd",
+        "details": "Editing is a tool that helps convey ideas. I can bridge the gap between watching and feeling with sound effects (sfx) and visual effects (vfx) because of my multiple years of experience in After effects, Premiere pro and DaVinci Resolve.",
         "image": ""
       },
       {
         "name": "Color Grading",
         "desc": "DaVinci Resolve grades that give footage its final voice.",
         "image": "/images/uploads/davinci-board.jpg",
-        "details": "qwdw"
+        "details": "I have developed my own power grade over the last year and with it I can easily change certain values to get any desired look I want, with the right filming setup of course. Color grading when you break it down to its core is essentially math, and I am not one to shy away from an equation or two."
       },
       {
         "name": "Brand Strategy",
-        "desc": "Connecting your story with the right audience."
+        "desc": "Connecting your story with the right audience.",
+        "details": "I have studied and experienced the algorithm countless times, to do well you don't just need someone who can edit and film for you, you also need someone who understands the psychology behind the viewer/buyer. As of 26/07/18 I have generated Duncan local businesses 5406 likes on social media with the average like count being 176 on 19 different videos.\n\nAds especially are treated harshly on social media, users don't wait to see if an ad will get good. Gen Z in particular scrolls past an ad in just 1.3 seconds if its not engaging enough. There is many ways to get around this for example this is what my process would look in order: Planning and executing the hooks, pattern interrupts, loops, pattern breaks and call to actions (CTA). There is also other things to be aware of like what is the goal of the ad, if the is ad indirect or not and what people/niches -> sub niches is the ad is targeting.",
+        "image": "/images/uploads/untitled-1.jpg"
       },
       {
         "name": "Creative Direction",
-        "desc": "Visual consistency from concept to execution."
+        "desc": "Visual consistency from concept to execution.",
+        "details": ""
       }
     ],
     "software": [
@@ -467,7 +471,12 @@
       "BMPCC 6K",
       "Sigma 18-35mm Art",
       "FX30",
-      "Sigma 18-50mm Sony"
+      "Sigma 18-50mm Sony",
+      "Tripod",
+      "DJI Gimbal",
+      "DJI Mics",
+      "Lighting Equipment",
+      "ND Filter"
     ]
   },
   "reelClips": [

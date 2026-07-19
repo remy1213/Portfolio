@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { ChevronDown, X } from "lucide-react";
 import { skills, sectionText, type Capability } from "@/lib/content";
 import { FitText } from "@/components/ui/fit-text";
@@ -67,27 +68,34 @@ function CapabilityRow({ cap, index }: { cap: Capability; index: number }) {
           </div>
         )}
 
-        {/* Full-size view of the capability image */}
-        {zoomOpen && cap.image && (
-          <div
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out"
-            onClick={() => setZoomOpen(false)}
-          >
-            <button
-              className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2"
+        {/* Full-size view of the capability image. Rendered via a portal:
+            the reveal wrapper carries a CSS transform, which re-anchors
+            position:fixed to itself — the portal escapes it so the overlay
+            truly covers the screen and the X sits in the corner. */}
+        {zoomOpen &&
+          cap.image &&
+          typeof document !== "undefined" &&
+          createPortal(
+            <div
+              className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out"
               onClick={() => setZoomOpen(false)}
-              aria-label="Close"
             >
-              <X className="w-8 h-8" />
-            </button>
-            <img
-              src={cap.image}
-              alt={cap.name}
-              className="max-w-full max-h-[90vh] object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-        )}
+              <button
+                className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2"
+                onClick={() => setZoomOpen(false)}
+                aria-label="Close"
+              >
+                <X className="w-8 h-8" />
+              </button>
+              <img
+                src={cap.image}
+                alt={cap.name}
+                className="max-w-full max-h-[90vh] object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>,
+            document.body
+          )}
       </div>
     </Reveal>
   );
