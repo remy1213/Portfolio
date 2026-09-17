@@ -1,0 +1,676 @@
+{
+  "profile": {
+    "name": "Remy Wilkins",
+    "heroEyebrow": "Filmed by Remy Wilkins, a Vancouver Island based creator.",
+    "heroWords": [
+      "Videography",
+      "Editing",
+      "Strategy",
+      "Design"
+    ],
+    "heroStats": [
+      {
+        "value": "50+",
+        "label": "videos delivered"
+      },
+      {
+        "value": "500+",
+        "label": "hours of experience"
+      }
+    ],
+    "aboutHeadline": "Who am I behind the camera?",
+    "aboutSubheading": "Hello my name is Remy I'm 18 years old as of 26/07/19. I'm based on Vancouver Island. I started editing videos when I was around 10 years old then I got into cameras and filming in late 2024.",
+    "aboutBio1": "Today, I collaborate with brands, creators, and companies to tell their stories or make them engaging content through video production, brand strategy, and web development (on the side). ",
+    "aboutBio2": "",
+    "aboutPortrait": "/images/uploads/dawdawd40653409.jpg",
+    "contactHeadline": "Want to work together?",
+    "contactSubheading": "Have an upcoming video project, design campaign, or website build? Drop a message and let's discuss how to bring it to life.",
+    "contactEmail": "remyw554@gmail.com",
+    "contactLocation": "Vancouver Island, BC",
+    "availability": "Available for work",
+    "socials": [
+      {
+        "name": "Instagram",
+        "url": ""
+      },
+      {
+        "name": "YouTube",
+        "url": ""
+      },
+      {
+        "name": "LinkedIn",
+        "url": ""
+      }
+    ],
+    "footerBanner": "/images/footer.png",
+    "siteTitle": "Remy Wilkins — Videographer & Editor",
+    "bookingUrl": "https://calendly.com/remyw554/30min",
+    "siteDescription": "Maker and thinker. Filming and editing."
+  },
+  "featuredWork": [
+    {
+      "slug": "44-collective-symphony",
+      "title": "44 Collective Symphony",
+      "description": "",
+      "client": "Derick",
+      "role": "film and edit",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://www.youtube.com/watch?v=Af9GpyC81w8",
+      "videoPreviewEnd": 5,
+      "videoPreview": "/videos/uploads/44-collective-symphony-preview.mp4",
+      "videoPreviewStart": 0,
+      "img": "/videos/uploads/44-collective-symphony-preview.jpg"
+    },
+    {
+      "slug": "real-estate-video",
+      "title": "Real Estate Video",
+      "description": "",
+      "client": "Kim",
+      "role": "Film and Edit",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtu.be/3rJUAOCTmCw",
+      "videoPreviewEnd": 6,
+      "videoPreview": "/videos/uploads/new-project-16-preview.mp4",
+      "img": "/videos/uploads/new-project-16-preview.jpg"
+    },
+    {
+      "slug": "44-collective-showcase-2",
+      "title": "44 Collective Showcase 2",
+      "description": "",
+      "client": "44 Collective",
+      "role": "Videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/pXwVK5hprOw",
+      "videoPreviewStart": 5,
+      "videoPreviewEnd": 10,
+      "videoPreview": "/videos/uploads/44-collective-showcase-2-preview.mp4",
+      "img": "/videos/uploads/44-collective-showcase-2-preview.jpg"
+    },
+    {
+      "slug": "vancouver-haus",
+      "title": "Vancouver HAÜS",
+      "description": "",
+      "client": "Jack",
+      "role": "Video and Edits",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtu.be/fCIOUZ3QzlY",
+      "videoPreviewEnd": 5,
+      "videoPreview": "/videos/uploads/new-project-15-preview.mp4",
+      "img": "/videos/uploads/new-project-15-preview.jpg"
+    },
+    {
+      "slug": "pride-parade-mix",
+      "title": "Pride Parade Mix",
+      "description": "",
+      "client": "Cowichan Pride",
+      "role": "Videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://www.youtube.com/watch?v=nTZBjO2cc94",
+      "videoPreviewEnd": 7,
+      "videoPreview": "/videos/uploads/pride-parade-mix-preview.mp4",
+      "img": "/videos/uploads/pride-parade-mix-preview.jpg"
+    },
+    {
+      "slug": "jaye-byard-anamorphic",
+      "title": "Jaye Byard Anamorphic",
+      "videoPreview": "/videos/uploads/jaye-byard-anamorphic-preview.mp4",
+      "videoPreviewStart": 0,
+      "videoPreviewEnd": 5,
+      "videoFull": "",
+      "description": "Anamorphic fight-camp footage of Jaye Byard, BC's Canadian heavyweight boxing champion. Shot ringside with wide cinematic framing to capture the grit, sweat, and discipline of a champion at work.",
+      "client": "Jaye Byard",
+      "role": "DP & Editor",
+      "date": "2025",
+      "gear": [
+        "BMPCC 6K",
+        "18-35mm Sigma Art Lens",
+        "Adobe Suite",
+        "DaVinci Resolve"
+      ],
+      "photos": [
+        "/images/2.jpg",
+        "/images/1.jpg"
+      ],
+      "videoUrl": "https://youtu.be/ITidVJYUOpM",
+      "img": "/videos/uploads/jaye-byard-anamorphic-preview.jpg"
+    },
+    {
+      "slug": "cycle-therapy-showcase",
+      "title": "Cycle Therapy Showcase",
+      "description": "",
+      "client": "Cycle Therapy",
+      "role": "Videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/I6t7YMPXrYA",
+      "videoPreviewEnd": 5,
+      "videoPreview": "/videos/uploads/cycle-therapy-showcase-preview.mp4",
+      "img": "/videos/uploads/cycle-therapy-showcase-preview.jpg"
+    },
+    {
+      "slug": "neko-ramen-showcase",
+      "title": "Neko Ramen Showcase",
+      "description": "",
+      "client": "Neko Ramen",
+      "role": "videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/10wPNEADV-8",
+      "videoPreviewEnd": 5,
+      "videoPreview": "/videos/uploads/neko-ramen-showcase-preview.mp4",
+      "img": "/videos/uploads/neko-ramen-showcase-preview.jpg"
+    },
+    {
+      "slug": "doom-city-records",
+      "title": "Doom City Records",
+      "description": "",
+      "client": "Doom City Records",
+      "role": "Videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/Q4qajvX3hJc",
+      "videoPreviewEnd": 15,
+      "videoPreview": "/videos/uploads/doom-city-records-preview.mp4",
+      "img": "/videos/uploads/doom-city-records-preview.jpg",
+      "videoPreviewStart": 10
+    },
+    {
+      "slug": "vi-pc-showcase",
+      "title": "VI PC Showcase",
+      "videoPreview": "/videos/uploads/vi-pc-showcase-preview.mp4",
+      "videoPreviewStart": 6,
+      "videoPreviewEnd": 15,
+      "videoFull": "",
+      "description": "A premium product reveal and showcase highlighting custom PC craftsmanship and tech aesthetics. Using microscopic macro shots, dynamic speed ramping, and neon-hued HSL color adjustments, the edit captures the sleek mechanical beauty and cooling performance of the custom build.",
+      "client": "VI PC Builders",
+      "role": "DP & Editor",
+      "date": "Summer 2026",
+      "gear": [
+        "BMPCC 6K",
+        "18-35mm Sigma Art Lens",
+        "Adobe Suite",
+        "DaVinci Resolve"
+      ],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/ls7WoN7Z6hg",
+      "img": "/videos/uploads/vi-pc-showcase-preview.jpg"
+    },
+    {
+      "slug": "i-want-to-win",
+      "title": "I want to win.",
+      "videoPreview": "/videos/uploads/i-want-to-win-preview.mp4",
+      "videoPreviewStart": 1,
+      "videoPreviewEnd": 7,
+      "videoFull": "",
+      "description": "An artistic visual poem exploring athletic drive, isolation, and competitive willpower. Shot with organic moody natural lighting, this short piece matches rhythmic, deliberate editing cuts with raw audio design to pull the viewer into the athlete's singular state of focus.\n\nThis poem was made for Vancouver Island Visual Poetry contest, me and my friend who made this were finalists in this competition with 9000 dollars worth of rewards.\n\nRecorded early 2025 on a canon T3i which is a very old camera designed for photos. This is only on my portfolio for the diversity. 26/07/19",
+      "client": "Personal Creative Project",
+      "role": "Director, DP & Editor",
+      "date": "Winter 2025",
+      "gear": [
+        "BMPCC 6K",
+        "18-35mm Sigma Art Lens",
+        "Adobe Suite",
+        "DaVinci Resolve"
+      ],
+      "photos": [
+        "/videos/bask.mp4",
+        "/images/uploads/img_0624-1.jpg",
+        "/images/uploads/img_0622-1.jpg",
+        "/images/uploads/img_0621-1.jpg",
+        "/images/uploads/img_0620-1.jpg"
+      ],
+      "videoUrl": "https://youtu.be/AvYqox6Hz4M",
+      "img": "/videos/uploads/i-want-to-win-preview.jpg"
+    },
+    {
+      "slug": "porsche-718-spyder",
+      "title": "Porsche 718 Spyder Edit",
+      "videoPreview": "/videos/uploads/porsche-718-spyder-preview.mp4",
+      "videoPreviewStart": 0,
+      "videoPreviewEnd": 6,
+      "videoFull": "",
+      "description": "A cinematic high-pace editing showcase featuring the Porsche 718 Spyder cruising along coastal roads. The project focuses on high-speed dynamic tracking, seamless sound design sync, and automotive color grading. Designed to capture the aggressive performance and raw emotion of open-top motoring. \n\nRecorded early 2025 on a canon T3i which is a very old camera designed for photos. This is only on my portfolio for the diversity so hopefully this will be replaced soon. 26/07/19",
+      "client": "Automotive Showcase",
+      "role": "Editor & Colorist",
+      "date": "2025",
+      "gear": [
+        "BMPCC 6K",
+        "18-35mm Sigma Art Lens",
+        "Adobe Suite",
+        "DaVinci Resolve"
+      ],
+      "photos": [
+        "/images/car.jpg"
+      ],
+      "videoUrl": "https://youtu.be/VaMBqU7CsC8",
+      "img": "/videos/uploads/porsche-718-spyder-preview.jpg"
+    },
+    {
+      "slug": "44-collective-showcase",
+      "title": "44 collective showcase",
+      "description": "",
+      "client": "44 collective",
+      "role": "videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/dqMZ7_opo7M",
+      "videoPreviewEnd": 5,
+      "videoPreview": "/videos/uploads/44-collective-showcase-preview.mp4",
+      "img": "/videos/uploads/44-collective-showcase-preview.jpg"
+    },
+    {
+      "slug": "westfalian-bakery-&-cafe-showcase",
+      "title": "Westfalian Bakery & Cafe Showcase",
+      "description": "",
+      "client": "Westfalian Bakery & Cafe",
+      "role": "videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/vyVrTrQs64U",
+      "videoPreviewEnd": 20,
+      "videoPreview": "/videos/uploads/westfalian-bakery-&-cafe-showcase-preview.mp4",
+      "img": "/videos/uploads/westfalian-bakery-&-cafe-showcase-preview.jpg",
+      "videoPreviewStart": 15
+    },
+    {
+      "slug": "a-dance-video",
+      "title": "A Dance Video",
+      "videoPreview": "/videos/uploads/a-dance-video-preview.mp4",
+      "videoPreviewStart": 11,
+      "videoPreviewEnd": 18,
+      "videoFull": "",
+      "description": "A kinetic dance film shot with Hans, built around fluid camera movement that mirrors the choreography. Every cut lands on the beat, letting the motion of the dancer and the motion of the camera blur into a single performance.",
+      "client": "Hans",
+      "role": "DP & Editor",
+      "date": "2026",
+      "gear": [
+        "BMPCC 6K",
+        "18-35mm Sigma Art Lens",
+        "Adobe Suite",
+        "DaVinci Resolve"
+      ],
+      "photos": [],
+      "videoUrl": "https://youtube.com/shorts/L4LXP3hR0SQ",
+      "img": "/videos/uploads/a-dance-video-preview.jpg"
+    },
+    {
+      "slug": "4k-visuals-from-dd",
+      "title": "4K Visuals From DD",
+      "description": "",
+      "client": "DDBIA",
+      "role": "Videographer",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtu.be/vUwAayrl--Q",
+      "videoPreviewEnd": 8,
+      "videoPreview": "/videos/uploads/4k-visuals-from-dd-preview.mp4",
+      "img": "/videos/uploads/4k-visuals-from-dd-preview.jpg",
+      "videoPreviewStart": 3
+    }
+  ],
+  "photos": [
+    {
+      "src": "/images/uploads/dsc04819.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04746-2.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04769-1.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04781.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04835.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04794.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04840.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04616.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04797.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04823.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04738.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04752.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04771.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04817.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04638.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04685-4.jpg",
+      "caption": "",
+      "zoomSrc": "/images/uploads/dsc04685-4-zoom.jpg"
+    },
+    {
+      "src": "/images/uploads/dsc04278-2.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04293-1.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04307.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc04447.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/timeline-1_01_00_27_25.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/timeline-1_01_00_31_02.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/timeline-1_01_00_07_25.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/fire11-1.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/img_1347.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/_mg_1141.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/1123-10.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/nailszoomopt.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/nailsopt.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/_mg_2025.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/_mg_2028.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/dsc03748-3-edit.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/1123-24.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/img_9937.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/img_9977-2.jpg",
+      "caption": ""
+    }
+  ],
+  "brands": [
+    {
+      "name": "",
+      "logo": "/images/uploads/hf_20260714_214527_00665a3e-5b74-46d5-a8e7-114705f296aa.jpg"
+    },
+    {
+      "name": "",
+      "logo": "/images/uploads/hf_20260714_214527_00665a3eawdawd-5b74-46d5-a8e7-114705f296aa.jpg"
+    },
+    {
+      "name": "",
+      "logo": "/images/uploads/awawdadwa.jpg"
+    },
+    {
+      "name": "",
+      "logo": "/images/uploads/hf_20260714_214527_00665wadawda3e-5b74-46d5-a8e7-114705f296aa.jpg"
+    },
+    {
+      "name": "",
+      "logo": "/images/uploads/hf_20260714_220927_8d63e266awdawd-f12d-4568-b85a-d989d412dbb0.jpg"
+    },
+    {
+      "name": "",
+      "logo": "/images/uploads/hf_20260714_2ewfwef14527_00665a3e-5b74-46d5-a8e7-114705f296aa.jpg"
+    },
+    {
+      "name": "",
+      "logo": "/images/uploads/duncan_marketing_material_page_02-e1468537992553-300x203.jpg"
+    },
+    {
+      "name": "",
+      "logo": "/images/uploads/duncan_marketing_mafsdfterial_page_02-e1468537992553-300x203.jpg"
+    }
+  ],
+  "skills": {
+    "capabilities": [
+      {
+        "name": "Videography & Editing",
+        "desc": "Cinematic storytelling from concept to final cut.",
+        "details": "Editing is a tool that helps convey ideas. I can bridge the gap between watching and feeling with sound effects (sfx) and visual effects (vfx) because of my multiple years of experience in After effects, Premiere pro and DaVinci Resolve.",
+        "image": ""
+      },
+      {
+        "name": "Color Grading",
+        "desc": "DaVinci Resolve grades that give footage its final voice.",
+        "image": "/images/uploads/davinci-board.jpg",
+        "details": "I have developed my own power grade over the last year and with it I can easily change certain values to get any desired look I want, with the right filming setup of course. Color grading when you break it down to its core is essentially math, and I am not one to shy away from an equation or two."
+      },
+      {
+        "name": "Brand Strategy",
+        "desc": "Connecting your story with the right audience.",
+        "details": "I have studied and experienced the algorithm countless times, to do well you don't just need someone who can edit and film for you, you also need someone who understands the psychology behind the viewer/buyer. As of 26/07/18 I have generated Duncan local businesses 5406 likes on social media with the average like count being 176 on 19 different videos.\n\nAds especially are treated harshly on social media, users don't wait to see if an ad will get good. Gen Z in particular scrolls past an ad in just 1.3 seconds if its not engaging enough. There is many ways to get around this for example this is what my process would look in order: Planning and executing the hooks, pattern interrupts, loops, pattern breaks and call to actions (CTA). There is also other things to be aware of like what is the goal of the ad, if the is ad indirect or not and what people/niches -> sub niches is the ad is targeting.",
+        "image": "/images/uploads/untitled-1.jpg"
+      },
+      {
+        "name": "Creative Direction",
+        "desc": "Visual consistency from concept to execution.",
+        "details": ""
+      }
+    ],
+    "software": [
+      "DaVinci Resolve",
+      "Premiere Pro",
+      "After Effects",
+      "Photoshop",
+      "Lightroom"
+    ],
+    "gear": [
+      "BMPCC 6K",
+      "Sigma 18-35mm Art",
+      "FX30",
+      "Sigma 18-50mm Sony",
+      "Tripod",
+      "DJI Gimbal",
+      "DJI Mics",
+      "Lighting Equipment",
+      "ND Filter"
+    ]
+  },
+  "reelClips": [
+    {
+      "src": "/videos/uploads/clipss01464511.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss01446934.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss01433423.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss01514915.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00251991.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00738281.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00736146.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00000000.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00254980.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00734976.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00728046.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00216966.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss3.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss5.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00722166.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss01444908.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00720637.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss2.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00719068.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00255207.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss00253201.mp4",
+      "label": ""
+    },
+    {
+      "src": "/videos/uploads/clipss4.mp4",
+      "label": ""
+    }
+  ],
+  "designWork": [
+    {
+      "title": "",
+      "images": []
+    }
+  ],
+  "sectionText": {
+    "heroTitleLine1": "Bringing ideas to",
+    "heroTitleLine2": "life with",
+    "workLabel": "Selected Work",
+    "workHeading": "Video Portfolio.",
+    "stillsLabel": "Stills",
+    "stillsHeading": "Gallery & Stills",
+    "stillsBlurb": "Photography from shoots, travels, and everything in between — edited with the same eye as the videos.",
+    "stillsButton": "View Gallery & Stills.",
+    "reelLabel": "Color & VFX",
+    "reelHeading": "Extra Clips & Edits.",
+    "brandsLabel": "Trusted By",
+    "skillsLabel": "Capabilities",
+    "skillsHeading": "What do I specialize in?",
+    "aboutLabel": "About",
+    "contactLabel": "Contact",
+    "aboutStoryLabel": "The story",
+    "aboutSkillsHeading": "Capabilities & toolbox.",
+    "aboutCtaHeading": "Want to talk more?"
+  },
+  "showcasePhoto": {
+    "image": "/images/uploads/dsc04769-web.jpg",
+    "zoomImage": "/images/uploads/dsc04769-zoom.jpg",
+    "caption": "",
+    "focusX": 45,
+    "focusY": 52
+  }
+}

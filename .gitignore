@@ -1,0 +1,55 @@
+# v0 sandbox internal files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+.vercel/
+next.user-config.*
+
+# Environment variables
+.env*.local
+
+# Common ignores
+node_modules
+.next/
+.DS_Store
+tsconfig.tsbuildinfo
+
+# Legacy full-quality masters and old previews in the videos root —
+# superseded by YouTube links + generated previews in public/videos/uploads/.
+# hero.mp4 and bask.mp4 stay tracked (already in git; ignore rules don't affect tracked files).
+public/videos/*.mp4
+public/videos/desktop.ini
+
+# Unused v0 template images
+public/images/audit.jpg
+public/images/bridge.png
+public/images/encrypted.jpg
+public/images/isolated.jpg
+public/images/permissions.jpg
+public/images/shield.png
+public/images/whale.png
+
+# Local tooling and save-backups
+.claude/
+data/content.backup.json
+
+# Uploaded originals not used by the site (as of 2026-07-18) — keep them
+# local; remove a line here if you start using that file in the admin
+public/videos/uploads/a005_12071322_c143_01444908.mp4
+public/videos/uploads/a005_12071323_c145_01446934.mp4
+public/videos/uploads/a005_12071332_c160_01462829.mp4
+public/videos/uploads/a005_12071316_c136_01433423.mp4
+public/videos/uploads/a005_12071401_c205_01514915.mp4
+public/videos/uploads/a005_12071333_c162_01464511.mp4
+public/videos/uploads/clipss00000000-1.mp4
+public/images/uploads/dsc03755.png
+public/images/uploads/fire11.jpg
+public/images/uploads/dsc04746-1.jpg
+public/images/uploads/dsc04dw769.jpg
+public/images/uploads/dsc04769.jpg
+public/images/uploads/img_0620.jpg
+public/images/uploads/img_0621.jpg
+public/images/uploads/img_0622.jpg
+public/images/uploads/img_0624.jpg

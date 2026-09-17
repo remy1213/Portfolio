@@ -1,0 +1,6 @@
+allowBuilds:
+  sharp: true
+  youtube-dl-exec: true
+onlyBuiltDependencies:
+  - sharp
+  - youtube-dl-exec
