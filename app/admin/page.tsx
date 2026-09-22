@@ -6,7 +6,7 @@ import {
   AlertCircle, CheckCircle2, Upload, Loader2, Type, Film,
   Image as ImageIcon, Star, Wrench, Clapperboard, Sparkles, Gauge, RefreshCw, Quote,
 } from "lucide-react";
-import { videoEmbedUrl, isDriveVideoUrl, defaultSectionText, type SiteContent, type FeaturedItem, type SectionTextKey } from "@/lib/content";
+import { videoEmbedUrl, isYouTubeVideoUrl, defaultSectionText, type SiteContent, type FeaturedItem, type SectionTextKey } from "@/lib/content";
 
 // Friendly labels for every editable headline/label on the site.
 const SECTION_TEXT_FIELDS: { key: SectionTextKey; label: string }[] = [
@@ -473,12 +473,12 @@ export default function AdminPage() {
     setCropBusy(null);
   };
 
-  // Google Drive links carry no orientation hint in the URL, so measure the
-  // real file's dimensions the moment one is pasted. YouTube is left alone —
-  // its Shorts-URL heuristic already frames correctly.
+  // Vimeo and Google Drive links carry no orientation hint in the URL, so
+  // measure the real dimensions the moment one is pasted. YouTube is left
+  // alone — its Shorts-URL heuristic already frames correctly.
   const probeOrientation = async (idx: number) => {
     const url = content?.featuredWork[idx]?.videoUrl;
-    if (!url || !isDriveVideoUrl(url)) return;
+    if (!url || !videoEmbedUrl(url) || isYouTubeVideoUrl(url)) return;
     setOrientationChecking((s) => ({ ...s, [idx]: true }));
     try {
       const res = await fetch("/api/admin/probe-video", {
@@ -881,11 +881,11 @@ export default function AdminPage() {
                       videoEmbedUrl(item.videoUrl) ? (
                         <p className="text-xs text-emerald-400 mt-2 flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5" />
-                          {!isDriveVideoUrl(item.videoUrl)
+                          {isYouTubeVideoUrl(item.videoUrl)
                             ? "Link recognized — this will play on the project page."
                             : orientationChecking[i]
-                              ? "Drive link recognized — checking orientation…"
-                              : `Drive link recognized — will play in a ${item.videoVertical ? "vertical (9:16)" : "widescreen (16:9)"} frame.`}
+                              ? "Link recognized — checking orientation…"
+                              : `Link recognized — will play in a ${item.videoVertical ? "vertical (9:16)" : "widescreen (16:9)"} frame.`}
                         </p>
                       ) : (
                         <p className="text-xs text-amber-400 mt-2 flex items-center gap-1.5">
@@ -894,6 +894,21 @@ export default function AdminPage() {
                       )
                     )}
                   </Field>
+
+                  {/* Orientation is detected automatically for Vimeo/Drive, but
+                      keep a manual switch — privacy settings can block a check. */}
+                  {item.videoUrl && videoEmbedUrl(item.videoUrl) && !isYouTubeVideoUrl(item.videoUrl) && (
+                    <label className="flex items-center gap-2.5 text-sm text-white/70 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 accent-white/80"
+                        checked={!!item.videoVertical}
+                        onChange={(e) => update((c) => ((c.featuredWork[i].videoVertical = e.target.checked), c))}
+                      />
+                      Vertical (9:16) video
+                      <span className="text-xs text-white/35">— detected automatically; override here if it looks wrong</span>
+                    </label>
+                  )}
 
                   <MediaField
                     label="Full video file (only if not using YouTube/Drive)"

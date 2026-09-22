@@ -122,6 +122,11 @@ export function isDriveVideoUrl(url?: string): boolean {
   return !!url && /drive\.google\.com\//.test(url);
 }
 
+/** True for YouTube links. */
+export function isYouTubeVideoUrl(url?: string): boolean {
+  return !!url && /(?:youtube\.com|youtu\.be)\//.test(url);
+}
+
 /** The file ID inside a Google Drive share link, or null. */
 export function driveFileId(url?: string): string | null {
   if (!url) return null;
@@ -145,13 +150,13 @@ export function driveDirectUrl(url?: string): string | null {
 /**
  * Whether a featured item's video is vertical (9:16).
  *
- * Google Drive links carry no orientation hint in the URL at all, so for
- * those we use the dimensions measured off the real file. YouTube keeps
- * the original Shorts-URL heuristic untouched — it already frames right.
+ * YouTube keeps the original Shorts-URL heuristic untouched — it already
+ * frames right. Vimeo and Google Drive links carry no orientation hint in
+ * the URL at all, so those use the measured//set value instead.
  */
 export function isVerticalItem(item: Pick<FeaturedItem, "videoVertical" | "videoUrl">): boolean {
-  if (isDriveVideoUrl(item.videoUrl)) return item.videoVertical ?? false;
-  return isVerticalVideoUrl(item.videoUrl);
+  if (isYouTubeVideoUrl(item.videoUrl)) return isVerticalVideoUrl(item.videoUrl);
+  return item.videoVertical ?? false;
 }
 
 /**
