@@ -182,7 +182,11 @@ export function videoEmbedUrl(url?: string): string | null {
   // Vimeo: vimeo.com/12345 or player.vimeo.com/video/12345
   const vimeo = trimmed.match(/vimeo\.com\/(?:video\/)?(\d{6,})/);
   if (vimeo) {
-    return `https://player.vimeo.com/video/${vimeo[1]}`;
+    // autoplay=0 & muted=0 override whatever the video's own embed settings
+    // say. They matter together: browsers refuse to autoplay with sound, so
+    // a player set to autoplay starts muted and makes the viewer unmute it.
+    // Waiting for a click means the click itself permits audio.
+    return `https://player.vimeo.com/video/${vimeo[1]}?autoplay=0&muted=0`;
   }
 
   // Google Drive: /file/d/ID/view, /file/d/ID/preview, or open?id=ID.
