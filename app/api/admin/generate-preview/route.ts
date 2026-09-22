@@ -23,12 +23,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: 'Invalid password' }, { status: 401 });
     }
 
-    // 3. Validate output path, and require either a local file or a YouTube link
+    // 3. Validate output path, and require either a local file or a video link
     if (!videoPreview) {
       return NextResponse.json({ ok: false, error: 'Missing loop preview output path' }, { status: 400 });
     }
     if (!videoFull && !videoUrl) {
-      return NextResponse.json({ ok: false, error: 'Add a full video file or a YouTube link first.' }, { status: 400 });
+      return NextResponse.json({ ok: false, error: 'Add a full video file or a YouTube/Google Drive link first.' }, { status: 400 });
     }
 
     const publicDir = path.join(process.cwd(), 'public');
@@ -39,7 +39,8 @@ export async function POST(req: Request) {
     }
 
     // Resolve the ffmpeg input: a local file when it exists, otherwise the
-    // direct stream URL of the YouTube upload (via yt-dlp).
+    // direct stream URL of the YouTube/Google Drive upload (via yt-dlp —
+    // it has a native Google Drive extractor, same code path as YouTube).
     let inputPath: string | null = null;
     if (videoFull) {
       const candidate = path.resolve(path.join(publicDir, videoFull));
@@ -78,7 +79,7 @@ export async function POST(req: Request) {
         if (!inputUrl.startsWith('http')) throw new Error('Could not resolve a video stream from that link.');
       } catch (ytErr: any) {
         console.error('[Preview Gen] yt-dlp failed:', ytErr);
-        return NextResponse.json({ ok: false, error: 'Could not read that YouTube link. Check the link is correct and the video is not private.' }, { status: 400 });
+        return NextResponse.json({ ok: false, error: 'Could not read that link. Check it is correct and the video is not private (for Google Drive, sharing must be set to "Anyone with the link").' }, { status: 400 });
       }
     }
 

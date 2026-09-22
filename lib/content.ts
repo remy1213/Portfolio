@@ -10,7 +10,8 @@ export type FeaturedItem = {
   videoPreviewStart?: number;
   videoPreviewEnd?: number;
   videoFull?: string;
-  videoUrl?: string; // YouTube/Vimeo link — takes priority over videoFull on the project page
+  videoUrl?: string; // YouTube/Vimeo/Google Drive link — takes priority over videoFull on the project page
+  videoVertical?: boolean; // measured from the generated preview's real dimensions — more reliable than guessing from the URL
   link?: string;
   description?: string;
   client?: string;
@@ -116,9 +117,46 @@ export function isVerticalVideoUrl(url?: string): boolean {
   return !!url && /youtube\.com\/shorts\//.test(url);
 }
 
+/** True for Google Drive links. */
+export function isDriveVideoUrl(url?: string): boolean {
+  return !!url && /drive\.google\.com\//.test(url);
+}
+
+/** The file ID inside a Google Drive share link, or null. */
+export function driveFileId(url?: string): string | null {
+  if (!url) return null;
+  const m = url.trim().match(/drive\.google\.com\/(?:file\/d\/([\w-]{10,})|open\?id=([\w-]{10,}))/);
+  return m ? m[1] || m[2] : null;
+}
+
 /**
- * Turns a pasted YouTube or Vimeo link into an embeddable player URL.
- * Returns null if the link isn't recognized.
+ * Direct-download URL for a Drive file — streams the ORIGINAL bytes.
+ *
+ * Drive's /preview iframe only serves its own transcodes: capped at 1080p,
+ * frequently still low-res for recent uploads, and with no way to ask for a
+ * quality. Pointing a native <video> at the original file avoids all that.
+ * confirm=t skips the "can't scan this for viruses" interstitial on big files.
+ */
+export function driveDirectUrl(url?: string): string | null {
+  const id = driveFileId(url);
+  return id ? `https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t` : null;
+}
+
+/**
+ * Whether a featured item's video is vertical (9:16).
+ *
+ * Google Drive links carry no orientation hint in the URL at all, so for
+ * those we use the dimensions measured off the real file. YouTube keeps
+ * the original Shorts-URL heuristic untouched — it already frames right.
+ */
+export function isVerticalItem(item: Pick<FeaturedItem, "videoVertical" | "videoUrl">): boolean {
+  if (isDriveVideoUrl(item.videoUrl)) return item.videoVertical ?? false;
+  return isVerticalVideoUrl(item.videoUrl);
+}
+
+/**
+ * Turns a pasted YouTube, Vimeo, or Google Drive link into an embeddable
+ * player URL. Returns null if the link isn't recognized.
  */
 export function videoEmbedUrl(url?: string): string | null {
   if (!url) return null;
@@ -140,6 +178,13 @@ export function videoEmbedUrl(url?: string): string | null {
   const vimeo = trimmed.match(/vimeo\.com\/(?:video\/)?(\d{6,})/);
   if (vimeo) {
     return `https://player.vimeo.com/video/${vimeo[1]}`;
+  }
+
+  // Google Drive: /file/d/ID/view, /file/d/ID/preview, or open?id=ID.
+  // The file's sharing must be set to "Anyone with the link".
+  const driveId = driveFileId(trimmed);
+  if (driveId) {
+    return `https://drive.google.com/file/d/${driveId}/preview`;
   }
 
   return null;

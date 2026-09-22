@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { featuredWork, sectionText, isVerticalVideoUrl, type FeaturedItem } from "@/lib/content";
+import { featuredWork, sectionText, isVerticalItem, type FeaturedItem } from "@/lib/content";
 import { FitText } from "@/components/ui/fit-text";
 import { Reveal, SplitReveal } from "@/components/gsap/animate";
 
@@ -102,9 +102,9 @@ function LazyPreviewVideo({
  * clips grow wider (≈5:4) — floating over neighboring cards.
  */
 function WorkCard({ item, index }: { item: FeaturedItem; index: number }) {
-  // Initial guess from the YouTube link (Shorts = vertical); refined with
-  // the preview video's actual dimensions once its metadata loads.
-  const [vertical, setVertical] = useState(isVerticalVideoUrl(item.videoUrl));
+  // Initial guess from the stored/measured orientation; refined with the
+  // preview video's actual dimensions once its metadata loads.
+  const [vertical, setVertical] = useState(isVerticalItem(item));
 
   const expandClasses = vertical
     ? "md:group-hover:-top-[13%] md:group-hover:-bottom-[13%]"

@@ -6,7 +6,7 @@ import {
   AlertCircle, CheckCircle2, Upload, Loader2, Type, Film,
   Image as ImageIcon, Star, Wrench, Clapperboard, Sparkles, Gauge, RefreshCw, Quote,
 } from "lucide-react";
-import { videoEmbedUrl, defaultSectionText, type SiteContent, type FeaturedItem, type SectionTextKey } from "@/lib/content";
+import { videoEmbedUrl, isDriveVideoUrl, defaultSectionText, type SiteContent, type FeaturedItem, type SectionTextKey } from "@/lib/content";
 
 // Friendly labels for every editable headline/label on the site.
 const SECTION_TEXT_FIELDS: { key: SectionTextKey; label: string }[] = [
@@ -49,8 +49,15 @@ const inputCls =
 const textareaCls =
   "w-full bg-white/5 border border-white/10 focus:border-white/30 outline-none text-white rounded-lg p-4 text-sm resize-y";
 
-function TextInput({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
-  return <input className={inputCls} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />;
+function TextInput({
+  value, onChange, placeholder, onBlur,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  onBlur?: () => void;
+}) {
+  return <input className={inputCls} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} onBlur={onBlur} />;
 }
 
 function TextArea({ value, onChange, rows = 3 }: { value: string; onChange: (v: string) => void; rows?: number }) {
@@ -262,6 +269,7 @@ export default function AdminPage() {
   const [isLocalHost, setIsLocalHost] = useState(true);
   const [genStatus, setGenStatus] = useState<Record<number, { type: "success" | "error" | "busy"; text: string }>>({});
   const [genResolution, setGenResolution] = useState<Record<number, string>>({});
+  const [orientationChecking, setOrientationChecking] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
     const host = window.location.host;
@@ -465,11 +473,34 @@ export default function AdminPage() {
     setCropBusy(null);
   };
 
+  // Google Drive links carry no orientation hint in the URL, so measure the
+  // real file's dimensions the moment one is pasted. YouTube is left alone —
+  // its Shorts-URL heuristic already frames correctly.
+  const probeOrientation = async (idx: number) => {
+    const url = content?.featuredWork[idx]?.videoUrl;
+    if (!url || !isDriveVideoUrl(url)) return;
+    setOrientationChecking((s) => ({ ...s, [idx]: true }));
+    try {
+      const res = await fetch("/api/admin/probe-video", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password, videoUrl: url }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        update((c) => ((c.featuredWork[idx].videoVertical = data.vertical), c));
+      }
+    } catch {
+      // Best-effort — the existing URL-based guess still applies as a fallback.
+    }
+    setOrientationChecking((s) => ({ ...s, [idx]: false }));
+  };
+
   const generatePreview = async (idx: number) => {
     if (!content) return;
     const item = content.featuredWork[idx];
     if (!item.videoFull && !item.videoUrl) {
-      setGenStatus((s) => ({ ...s, [idx]: { type: "error", text: "Add a full video file or a YouTube link first." } }));
+      setGenStatus((s) => ({ ...s, [idx]: { type: "error", text: "Add a full video file or a YouTube/Google Drive link first." } }));
       return;
     }
     // No preview path yet? Pick a sensible one automatically.
@@ -478,7 +509,7 @@ export default function AdminPage() {
       previewPath = `/videos/uploads/${item.slug || `project-${idx + 1}`}-preview.mp4`;
       update((c) => ((c.featuredWork[idx].videoPreview = previewPath), c));
     }
-    setGenStatus((s) => ({ ...s, [idx]: { type: "busy", text: item.videoFull ? "Generating preview… this can take a minute." : "Pulling from YouTube and generating… this can take a few minutes." } }));
+    setGenStatus((s) => ({ ...s, [idx]: { type: "busy", text: item.videoFull ? "Generating preview… this can take a minute." : "Pulling from the link and generating… this can take a few minutes." } }));
     try {
       const res = await fetch("/api/admin/generate-preview", {
         method: "POST",
@@ -837,30 +868,36 @@ export default function AdminPage() {
                   </div>
 
                   <Field
-                    label="YouTube link (recommended)"
-                    hint="Upload the full film to YouTube (unlisted is fine) and paste the link here. The project page will show the YouTube player — no big file upload needed. Vimeo links work too."
+                    label="YouTube or Google Drive link (recommended)"
+                    hint="Upload the full film to YouTube (unlisted is fine) and paste the link here, or paste a Google Drive share link (set sharing to “Anyone with the link”). The project page will show a player — no big file upload needed. Vimeo links work too."
                   >
                     <TextInput
                       value={item.videoUrl || ""}
-                      placeholder="https://www.youtube.com/watch?v=..."
+                      placeholder="https://www.youtube.com/watch?v=... or https://drive.google.com/file/d/.../view"
                       onChange={(v) => update((c) => ((c.featuredWork[i].videoUrl = v), c))}
+                      onBlur={() => probeOrientation(i)}
                     />
                     {item.videoUrl && item.videoUrl.trim() !== "" && (
                       videoEmbedUrl(item.videoUrl) ? (
                         <p className="text-xs text-emerald-400 mt-2 flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3.5 h-3.5" /> Link recognized — this will play on the project page.
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          {!isDriveVideoUrl(item.videoUrl)
+                            ? "Link recognized — this will play on the project page."
+                            : orientationChecking[i]
+                              ? "Drive link recognized — checking orientation…"
+                              : `Drive link recognized — will play in a ${item.videoVertical ? "vertical (9:16)" : "widescreen (16:9)"} frame.`}
                         </p>
                       ) : (
                         <p className="text-xs text-amber-400 mt-2 flex items-center gap-1.5">
-                          <AlertCircle className="w-3.5 h-3.5" /> That doesn't look like a YouTube or Vimeo link.
+                          <AlertCircle className="w-3.5 h-3.5" /> That doesn't look like a YouTube, Vimeo, or Google Drive link.
                         </p>
                       )
                     )}
                   </Field>
 
                   <MediaField
-                    label="Full video file (only if not using YouTube)"
-                    hint="A video file on this computer. Skipped when a YouTube link is set above."
+                    label="Full video file (only if not using YouTube/Drive)"
+                    hint="A video file on this computer. Skipped when a YouTube or Google Drive link is set above."
                     value={item.videoFull || ""}
                     onChange={(v) => update((c) => ((c.featuredWork[i].videoFull = v), c))}
                     password={password}
@@ -881,7 +918,7 @@ export default function AdminPage() {
                       <Film className="w-4 h-4" /> Auto-make a loop preview
                     </div>
                     <p className="text-xs text-white/40">
-                      Uses the full video file if there is one, otherwise pulls straight from the YouTube link above.
+                      Uses the full video file if there is one, otherwise pulls straight from the YouTube or Google Drive link above.
                       Leave the loop preview path empty and it picks one for you.
                     </p>
                     <div className="flex flex-wrap items-end gap-3">

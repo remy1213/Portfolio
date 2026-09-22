@@ -64,18 +64,18 @@
       "img": "/videos/uploads/44-collective-symphony-preview.jpg"
     },
     {
-      "slug": "real-estate-video",
-      "title": "Real Estate Video",
+      "slug": "6261-realestate-video",
+      "title": "6261 Realestate Video",
       "description": "",
-      "client": "Kim",
+      "client": "Darren Meiner",
       "role": "Film and Edit",
       "date": "2026",
       "gear": [],
       "photos": [],
-      "videoUrl": "https://youtu.be/3rJUAOCTmCw",
-      "videoPreviewEnd": 6,
-      "videoPreview": "/videos/uploads/new-project-16-preview.mp4",
-      "img": "/videos/uploads/new-project-16-preview.jpg"
+      "videoUrl": "https://drive.google.com/file/d/1aO7jqrMlLCvIPX50evGw6T1AUEDFEZeW/view?usp=drive_link",
+      "videoPreviewEnd": 7,
+      "videoPreview": "/videos/uploads/6261-realestate-video-preview.mp4",
+      "videoVertical": true
     },
     {
       "slug": "44-collective-showcase-2",
@@ -119,6 +119,20 @@
       "videoPreviewEnd": 7,
       "videoPreview": "/videos/uploads/pride-parade-mix-preview.mp4",
       "img": "/videos/uploads/pride-parade-mix-preview.jpg"
+    },
+    {
+      "slug": "real-estate-video",
+      "title": "Real Estate Video",
+      "description": "",
+      "client": "Kim",
+      "role": "Film and Edit",
+      "date": "2026",
+      "gear": [],
+      "photos": [],
+      "videoUrl": "https://youtu.be/3rJUAOCTmCw",
+      "videoPreviewEnd": 6,
+      "videoPreview": "/videos/uploads/new-project-16-preview.mp4",
+      "img": "/videos/uploads/new-project-16-preview.jpg"
     },
     {
       "slug": "jaye-byard-anamorphic",
@@ -342,6 +356,10 @@
       "caption": ""
     },
     {
+      "src": "/images/uploads/1123-58v2.jpg",
+      "caption": ""
+    },
+    {
       "src": "/images/uploads/dsc04835.jpg",
       "caption": ""
     },
@@ -419,6 +437,10 @@
       "caption": ""
     },
     {
+      "src": "/images/uploads/nailsopt.jpg",
+      "caption": ""
+    },
+    {
       "src": "/images/uploads/fire11-1.jpg",
       "caption": ""
     },
@@ -435,11 +457,11 @@
       "caption": ""
     },
     {
-      "src": "/images/uploads/nailszoomopt.jpg",
+      "src": "/images/uploads/1123-68796r60.jpg",
       "caption": ""
     },
     {
-      "src": "/images/uploads/nailsopt.jpg",
+      "src": "/images/uploads/nailszoomopt.jpg",
       "caption": ""
     },
     {
@@ -448,6 +470,10 @@
     },
     {
       "src": "/images/uploads/_mg_2028.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/1123-55v2.jpg",
       "caption": ""
     },
     {
@@ -464,6 +490,10 @@
     },
     {
       "src": "/images/uploads/img_9977-2.jpg",
+      "caption": ""
+    },
+    {
+      "src": "/images/uploads/1123-52.jpg",
       "caption": ""
     }
   ],

@@ -1,11 +1,70 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { featuredWork, videoEmbedUrl, isVerticalVideoUrl } from "@/lib/content";
+import { featuredWork, videoEmbedUrl, isVerticalItem, driveDirectUrl, type FeaturedItem } from "@/lib/content";
 import { Navigation } from "@/components/landing/navigation";
 import { FooterSection } from "@/components/landing/footer-section";
 import { ArrowLeft, Camera, Film, Calendar, User, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+const videoFrameCls = (vertical: boolean) =>
+  `rounded-2xl overflow-hidden bg-black/40 border-2 border-white/10 shadow-2xl mb-16 ${
+    vertical ? "aspect-[9/16] h-[80vh] mx-auto" : "aspect-video w-full"
+  }`;
+
+/**
+ * Google Drive playback. Streams the original file rather than using Drive's
+ * /preview iframe, which caps at 1080p and often serves a much lower-res
+ * transcode with no way to request better. Orientation comes from the real
+ * loaded dimensions, so vertical films get a 9:16 frame.
+ *
+ * Falls back to Drive's iframe if the direct stream is refused — that happens
+ * when the file isn't shared publicly, or its download quota is exhausted.
+ */
+function DriveVideo({ item }: { item: FeaturedItem }) {
+  const [failed, setFailed] = useState(false);
+  const [vertical, setVertical] = useState(isVerticalItem(item));
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // A src that fails fast can error before React attaches its onError, so
+  // re-check the element once on mount.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (v?.error) setFailed(true);
+  }, []);
+
+  if (failed) {
+    return (
+      <div className={videoFrameCls(vertical)}>
+        <iframe
+          src={videoEmbedUrl(item.videoUrl)!}
+          title={item.title}
+          allow="autoplay; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen
+          className="w-full h-full"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className={videoFrameCls(vertical)}>
+      <video
+        ref={videoRef}
+        src={driveDirectUrl(item.videoUrl)!}
+        controls
+        playsInline
+        preload="metadata"
+        onLoadedMetadata={(e) => {
+          const v = e.currentTarget;
+          if (v.videoWidth && v.videoHeight) setVertical(v.videoHeight > v.videoWidth);
+        }}
+        onError={() => setFailed(true)}
+        className="w-full h-full object-contain bg-black"
+      />
+    </div>
+  );
+}
 
 export default function WorkDetailPage() {
   const params = useParams();
@@ -46,11 +105,13 @@ export default function WorkDetailPage() {
           </a>
         </div>
 
-        {/* Full Quality Video — YouTube/Vimeo embed takes priority over a local file */}
-        {videoEmbedUrl(item.videoUrl) ? (
+        {/* Full Quality Video — an embed link takes priority over a local file */}
+        {driveDirectUrl(item.videoUrl) ? (
+          <DriveVideo item={item} />
+        ) : videoEmbedUrl(item.videoUrl) ? (
           <div
             className={`rounded-2xl overflow-hidden bg-black/40 border-2 border-white/10 shadow-2xl mb-16 ${
-              isVerticalVideoUrl(item.videoUrl)
+              isVerticalItem(item)
                 ? "aspect-[9/16] h-[80vh] mx-auto"
                 : "aspect-video w-full"
             }`}
